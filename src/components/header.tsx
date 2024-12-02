@@ -1,4 +1,4 @@
-import { History } from "lucide-react";
+import { History, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import {
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { useState } from "react";
 import { DarkModeToggle } from "./dark-mode-toggle";
+import { DEFAULT_TITLE } from "@/utils/constants";
 
 export default function Header() {
   const [isHistorySheetVisible, setIsHistorySheetVisible] =
@@ -122,9 +123,12 @@ export default function Header() {
               </filter>
             </defs>
           </svg>
-          <h1 className="font-bold">Text Scroller</h1>
+          <h1 className="font-bold">{DEFAULT_TITLE}</h1>
         </div>
         <div className="flex gap-2">
+          <Button size="icon" variant="outline">
+            <Sparkles />
+          </Button>
           <Button
             size="icon"
             variant="outline"
@@ -148,9 +152,7 @@ export default function Header() {
           <SheetHeader>
             <SheetTitle>History</SheetTitle>
           </SheetHeader>
-          <div className="flex flex-col mt-5">
-            
-          </div>
+          <div className="flex flex-col mt-5"></div>
         </SheetContent>
       </Sheet>
     </>

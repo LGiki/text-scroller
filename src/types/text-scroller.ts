@@ -21,16 +21,13 @@ export enum BlinkFrequency {
     Slow = 'slow',
     Medium = 'medium',
     Fast = 'fast',
-}
-
-export enum BlinkMode {
-    Linear = 'linear',
-    Step = 'step',
+    UltraFast = 'ultraFast'
 }
 
 export interface TextScrollerConfig {
     scrollerText: string
     backgroundColor: string
+    italic: boolean
     textColor: string
     fontWeight: React.CSSProperties["fontWeight"]
     fontSizePercentage: string
@@ -38,7 +35,6 @@ export interface TextScrollerConfig {
     glowIntensity: GlowIntensity
     blink: boolean
     blinkFrequency: BlinkFrequency
-    blinkMode: BlinkMode
     scrollDirection: Direction
     textDirection: Direction
     scrollSpeed: ScrollSpeed

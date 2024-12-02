@@ -1,4 +1,5 @@
 import { Direction, TextScrollerConfig } from "@/types/text-scroller";
+import { BlinkFrequencySettings } from "@/utils/constants";
 import { useEffect, useRef } from "react";
 
 export default function TextScrollerCanvas(props: {
@@ -26,7 +27,8 @@ export default function TextScrollerCanvas(props: {
     const speed = 10;
 
     let blinkOpacity = 1;
-    let blinkDirection = -0.05;
+    let blinkDirection =
+      BlinkFrequencySettings[props.scrollerConfig.blinkFrequency];
 
     const onCanvasResize = () => {
       canvas.width = canvas.offsetWidth;
@@ -57,7 +59,9 @@ export default function TextScrollerCanvas(props: {
           ? canvas.width
           : canvas.height);
 
-      ctx.font = `${props.scrollerConfig.fontWeight} ${fontSize}px sans-serif`;
+      ctx.font = `${props.scrollerConfig.italic ? "italic" : "normal"} ${
+        props.scrollerConfig.fontWeight
+      } ${fontSize}px sans-serif`;
       ctx.fillStyle = props.scrollerConfig.textColor;
 
       ctx.textBaseline =
@@ -76,7 +80,17 @@ export default function TextScrollerCanvas(props: {
 
       if (props.scrollerConfig.glow) {
         ctx.shadowColor = props.scrollerConfig.textColor;
-        ctx.shadowBlur = 20;
+        // 10%: 5 8 11
+        // 20%: 7 10 13
+        // 30%:
+        // 40%:
+        // 50%:
+        // 60%:
+        // 70%:
+        // 80%:
+        // 90%:
+        //100%: 15 35 50
+        ctx.shadowBlur = 50;
       }
 
       const textMetrics = ctx.measureText(text);
