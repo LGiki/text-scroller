@@ -1,4 +1,14 @@
-import { ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Type } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowDown,
+  Type,
+  Snail,
+  Turtle,
+  Rabbit,
+  Rocket,
+} from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
@@ -141,6 +151,7 @@ export default function TextScrollerSettings(props: {
                   glowIntensity: newGlowIntensity as GlowIntensity,
                 });
               }}
+              className="overflow-x-auto"
             >
               <TabsList>
                 <TabsTrigger
@@ -184,30 +195,35 @@ export default function TextScrollerSettings(props: {
                   blinkFrequency: newBlinkFrequency as BlinkFrequency,
                 })
               }
+              className="overflow-x-auto"
             >
               <TabsList>
                 <TabsTrigger
                   value={BlinkFrequency.Slow}
                   disabled={!props.scrollerConfig.blink}
                 >
+                  <Snail className="w-4 h-4 mr-2" />
                   Slow
                 </TabsTrigger>
                 <TabsTrigger
                   value={BlinkFrequency.Medium}
                   disabled={!props.scrollerConfig.blink}
                 >
+                  <Turtle className="w-4 h-4 mr-2" />
                   Medium
                 </TabsTrigger>
                 <TabsTrigger
                   value={BlinkFrequency.Fast}
                   disabled={!props.scrollerConfig.blink}
                 >
+                  <Rabbit className="w-4 h-4 mr-2" />
                   Fast
                 </TabsTrigger>
                 <TabsTrigger
                   value={BlinkFrequency.UltraFast}
                   disabled={!props.scrollerConfig.blink}
                 >
+                  <Rocket className="w-4 h-4 mr-2" />
                   Ultra Fast
                 </TabsTrigger>
               </TabsList>
@@ -226,6 +242,7 @@ export default function TextScrollerSettings(props: {
                   scrollDirection: newScrollDirection as Direction,
                 })
               }
+              className="overflow-x-auto"
             >
               <TabsList>
                 <TabsTrigger value={Direction.Up}>
@@ -256,6 +273,7 @@ export default function TextScrollerSettings(props: {
                   textDirection: newTextDirection as Direction,
                 })
               }
+              className="overflow-x-auto"
             >
               <TabsList>
                 <TabsTrigger value={Direction.Up}>
@@ -286,11 +304,21 @@ export default function TextScrollerSettings(props: {
                   scrollSpeed: newScrollSpeed as ScrollSpeed,
                 })
               }
+              className="overflow-x-auto"
             >
               <TabsList>
-                <TabsTrigger value={ScrollSpeed.Slow}>Slow</TabsTrigger>
-                <TabsTrigger value={ScrollSpeed.Medium}>Medium</TabsTrigger>
-                <TabsTrigger value={ScrollSpeed.Fast}>Fast</TabsTrigger>
+                <TabsTrigger value={ScrollSpeed.Slow}>
+                  <Snail className="w-4 h-4 mr-2" />
+                  Slow
+                </TabsTrigger>
+                <TabsTrigger value={ScrollSpeed.Medium}>
+                  <Turtle className="w-4 h-4 mr-2" />
+                  Medium
+                </TabsTrigger>
+                <TabsTrigger value={ScrollSpeed.Fast}>
+                  <Rabbit className="w-4 h-4 mr-2" />
+                  Fast
+                </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>

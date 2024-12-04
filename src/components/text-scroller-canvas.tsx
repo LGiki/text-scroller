@@ -1,10 +1,12 @@
+import { cn } from "@/lib/utils";
 import { Direction, TextScrollerConfig } from "@/types/text-scroller";
 import { BlinkFrequencySettings } from "@/utils/constants";
 import { useEffect, useRef } from "react";
 
 export default function TextScrollerCanvas(props: {
-  onCloseClick: () => void;
+  onClick?: () => void;
   scrollerConfig: TextScrollerConfig;
+  className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -266,9 +268,9 @@ export default function TextScrollerCanvas(props: {
 
   return (
     <canvas
-      className="w-full h-full"
+      className={cn("w-full h-full", props.className)}
       ref={canvasRef}
-      onClick={props.onCloseClick}
+      onClick={props.onClick}
     />
   );
 }

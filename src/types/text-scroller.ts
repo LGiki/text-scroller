@@ -39,3 +39,10 @@ export interface TextScrollerConfig {
     textDirection: Direction
     scrollSpeed: ScrollSpeed
 }
+
+export interface ScrollerConfigState {
+    scrollerConfig: TextScrollerConfig
+    updateScrollerConfig: (scrollerConfig: Partial<TextScrollerConfig>) => void
+    setScrollerConfig: (scrollerConfig: TextScrollerConfig) => void
+    resetScrollerConfig: () => void
+}

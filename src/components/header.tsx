@@ -1,19 +1,22 @@
 import { History, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { useState } from "react";
-import { DarkModeToggle } from "./dark-mode-toggle";
+import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import { DEFAULT_TITLE } from "@/utils/constants";
+import { useHistoryScollersStore } from "@/stores/useHistoryScrollersStore";
+import ScrollerListSheet from "./scroller-list-sheet";
+import { useFavoriteScollersStore } from "@/stores/useFavoriteScrollersStore";
+import { toast } from "sonner";
 
 export default function Header() {
   const [isHistorySheetVisible, setIsHistorySheetVisible] =
     useState<boolean>(false);
+  const [isFavoriteSheetVisible, setIsFavoriteSheetVisible] =
+    useState<boolean>(false);
+
+  const historyScrollersStore = useHistoryScollersStore();
+  const favoriteScrollersStore = useFavoriteScollersStore();
 
   return (
     <>
@@ -126,7 +129,11 @@ export default function Header() {
           <h1 className="font-bold">{DEFAULT_TITLE}</h1>
         </div>
         <div className="flex gap-2">
-          <Button size="icon" variant="outline">
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={() => setIsFavoriteSheetVisible(true)}
+          >
             <Sparkles />
           </Button>
           <Button
@@ -144,17 +151,42 @@ export default function Header() {
           </a>
         </div>
       </div>
-      <Sheet
+      <ScrollerListSheet
+        open={isFavoriteSheetVisible}
+        onOpenChange={setIsFavoriteSheetVisible}
+        scrollersStore={favoriteScrollersStore}
+        onDeleteAllClick={() => {
+          favoriteScrollersStore.removeAll();
+          toast.success("All items deleted.");
+        }}
+        onDeleteItemClick={(id) => {
+          favoriteScrollersStore.remove(id);
+          toast.success("Item deleted.");
+        }}
+      >
+        <div className="flex gap-2 items-center">
+          <Sparkles className="w-4 h-4" />
+          Favorite
+        </div>
+      </ScrollerListSheet>
+      <ScrollerListSheet
         open={isHistorySheetVisible}
         onOpenChange={setIsHistorySheetVisible}
+        scrollersStore={historyScrollersStore}
+        onDeleteAllClick={() => {
+          historyScrollersStore.removeAll();
+          toast.success("All items deleted.");
+        }}
+        onDeleteItemClick={(id) => {
+          historyScrollersStore.remove(id);
+          toast.success("Item deleted.");
+        }}
       >
-        <SheetContent side="left">
-          <SheetHeader>
-            <SheetTitle>History</SheetTitle>
-          </SheetHeader>
-          <div className="flex flex-col mt-5"></div>
-        </SheetContent>
-      </Sheet>
+        <div className="flex gap-2 items-center">
+          <History className="w-4 h-4" />
+          History
+        </div>
+      </ScrollerListSheet>
     </>
   );
 }

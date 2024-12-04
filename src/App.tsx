@@ -1,62 +1,56 @@
 import { Button } from "./components/ui/button";
 import { Textarea } from "./components/ui/textarea";
-import { Play, Star } from "lucide-react";
-import { useState } from "react";
+import { Eraser, Play, Star } from "lucide-react";
 import Header from "./components/header";
-import {
-  BlinkFrequency,
-  GlowIntensity,
-  Direction,
-  ScrollSpeed,
-  TextScrollerConfig,
-} from "./types/text-scroller";
-import TextScrollerCanvas from "./components/text-scroller-canvas";
-import TextScrollerSettings from "./components/text-scroller-settings";
+import TextScrollerCanvas from "@/components/text-scroller-canvas";
+import TextScrollerSettings from "@/components/text-scroller-settings";
+import { useHistoryScollersStore } from "@/stores/useHistoryScrollersStore";
+import { useScrollerInstanceStore } from "@/stores/useScrollerInstanceStore";
+import { useScrollerEditorStore } from "./stores/useScrollerEditorStore";
 
 export default function App() {
-  const [isScrollerVisible, setIsScrollerVisible] = useState<boolean>(false);
-
-  const [scrollerConfig, setScrollerConfig] = useState<TextScrollerConfig>({
-    italic: false,
-    backgroundColor: "#000000",
-    textColor: "#ffffff",
-    fontWeight: "500",
-    fontSizePercentage: "100",
-    glow: false,
-    glowIntensity: GlowIntensity.Medium,
-    blink: false,
-    blinkFrequency: BlinkFrequency.Medium,
-    textDirection: Direction.Down,
-    scrollDirection: Direction.Left,
-    scrollSpeed: ScrollSpeed.Medium,
-    scrollerText: "你好世界",
-  });
+  const historyScrollersStore = useHistoryScollersStore();
+  const scrollerInstanceStore = useScrollerInstanceStore();
+  const scrollerEditorStore = useScrollerEditorStore();
 
   return (
     <>
       <div className="flex flex-col h-dvh">
         <Header />
         <div className="flex flex-col gap-3 flex-1 h-0 w-full p-3">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex gap-2 w-full">
             <Textarea
-              className="resize-none"
+              className="resize-none flex-1"
               placeholder="Your Text Here..."
-              value={scrollerConfig.scrollerText}
+              value={scrollerEditorStore.scrollerConfig.scrollerText}
               onChange={(e) =>
-                setScrollerConfig((config) => ({
-                  ...config,
+                scrollerEditorStore.updateScrollerConfig({
                   scrollerText: e.target.value,
-                }))
+                })
               }
             />
+            <Button
+              className="h-full flex-shrink-0"
+              variant="outline"
+              disabled={
+                scrollerEditorStore.scrollerConfig.scrollerText.length === 0
+              }
+              onClick={() => {
+                scrollerEditorStore.updateScrollerConfig({
+                  scrollerText: "",
+                });
+              }}
+            >
+              <Eraser />
+              Clear
+            </Button>
           </div>
           <TextScrollerSettings
-            scrollerConfig={scrollerConfig}
+            scrollerConfig={scrollerEditorStore.scrollerConfig}
             onScrollerConfigChange={(newScollerConfig) => {
-              setScrollerConfig((config) => ({
-                ...config,
+              scrollerEditorStore.updateScrollerConfig({
                 ...newScollerConfig,
-              }));
+              });
             }}
           />
           <div className="flex-shrink-0 flex gap-2">
@@ -65,7 +59,13 @@ export default function App() {
               Favorite
             </Button>
             <Button
-              onClick={() => setIsScrollerVisible(true)}
+              onClick={() => {
+                scrollerInstanceStore.setScrollerConfig(
+                  scrollerEditorStore.scrollerConfig
+                );
+                scrollerInstanceStore.showScroller();
+                historyScrollersStore.add(scrollerEditorStore.scrollerConfig);
+              }}
               className="flex-1"
             >
               <Play />
@@ -74,11 +74,11 @@ export default function App() {
           </div>
         </div>
       </div>
-      {isScrollerVisible && (
-        <div className="absolute left-0 top-0 h-dvh w-screen">
+      {scrollerInstanceStore.isScrollerInstanceVisible && (
+        <div className="absolute left-0 top-0 h-dvh w-screen z-[1000]">
           <TextScrollerCanvas
-            onCloseClick={() => setIsScrollerVisible(false)}
-            scrollerConfig={scrollerConfig as TextScrollerConfig}
+            onClick={scrollerInstanceStore.hideScroller}
+            scrollerConfig={scrollerInstanceStore.scrollerConfig}
           />
         </div>
       )}
