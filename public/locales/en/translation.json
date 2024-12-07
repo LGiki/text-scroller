@@ -1,0 +1,76 @@
+{
+    "play": "Play",
+    "reset": "Reset",
+    "favorite": "Favorite",
+    "clear": "Clear",
+    "scrollerTextInputPlacerholder": "Your text here...",
+    "history": "History",
+    "delete": "Delete",
+    "edit": "Edit",
+    "deleteAll": "Delete All",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirmDelete": "Confirm Delete",
+    "noData": "No Data",
+    "language": "Language",
+    "direction": {
+        "up": "Up",
+        "down": "Down",
+        "left": "Left",
+        "right": "Right"
+    },
+    "speed": {
+        "slow": "Slow",
+        "medium": "Medium",
+        "fast": "Fast",
+        "ultraFast": "Ultra Fast"
+    },
+    "intensity": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+    },
+    "darkMode": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "toggleTheme": "Toggle theme"
+    },
+    "editor": {
+        "background": {
+            "name": "Background Setting",
+            "color": "Background Color"
+        },
+        "font": {
+            "name": "Font Setting",
+            "color": "Text Color",
+            "italic": "Italic",
+            "weight": "Font Weight",
+            "size": "Font Size"
+        },
+        "effect": {
+            "name": "Effect",
+            "glow": "Glow",
+            "glowIntensity": "Glow Intensity",
+            "blink": "Blink",
+            "blinkFrequency": "Blink Frequency"
+        },
+        "scroll": {
+            "name": "Scroll Setting",
+            "scrollDirection": "Scroll Direction",
+            "textDirection": "Text Direction",
+            "scrollSpeed": "Scroll Speed"
+        }
+    },
+    "toast": {
+        "scrollerDeleted": "Scroller deleted",
+        "allScrollerDeleted": "All scroller deleted",
+        "emptyScrollerContent": "The scroller content is empty"
+    },
+    "dialog": {
+        "deleteAll": {
+            "title": "Confirm Delete All",
+            "description": "Are you sure you want to delete all items? This action cannot be undone and will permanently remove all entries."
+        }
+    }
+}

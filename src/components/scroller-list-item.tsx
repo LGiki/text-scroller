@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export default function ScollerListItem(props: {
   title: string;
@@ -15,6 +16,8 @@ export default function ScollerListItem(props: {
   onDeleteClick?: () => void;
   className?: string;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div
       className={cn(
@@ -35,6 +38,8 @@ export default function ScollerListItem(props: {
             variant="outline"
             className="h-8 w-8"
             onClick={props.onPlayClick}
+            title={t("play")}
+            aria-label={t("play")}
           >
             <Play />
           </Button>
@@ -43,12 +48,20 @@ export default function ScollerListItem(props: {
             variant="outline"
             className="h-8 w-8"
             onClick={props.onEditClick}
+            title={t("edit")}
+            aria-label={t("edit")}
           >
             <Pencil />
           </Button>
           <Popover>
-            <PopoverTrigger>
-              <Button size="icon" variant="destructive" className="h-8 w-8">
+            <PopoverTrigger asChild>
+              <Button
+                size="icon"
+                variant="destructive"
+                className="h-8 w-8"
+                title={t("delete")}
+                aria-label={t("delete")}
+              >
                 <Trash2 />
               </Button>
             </PopoverTrigger>
@@ -58,9 +71,11 @@ export default function ScollerListItem(props: {
                 size="sm"
                 className="w-full"
                 onClick={props.onDeleteClick}
+                title={t("confirmDelete")}
+                aria-label={t("confirmDelete")}
               >
                 <Check />
-                Confirm
+                {t("confirm")}
               </Button>
             </PopoverContent>
           </Popover>

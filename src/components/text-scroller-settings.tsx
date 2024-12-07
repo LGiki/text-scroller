@@ -8,6 +8,9 @@ import {
   Turtle,
   Rabbit,
   Rocket,
+  WifiLow,
+  WifiHigh,
+  Wifi,
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
@@ -26,6 +29,7 @@ import {
   ScrollSpeed,
   TextScrollerConfig,
 } from "@/types/text-scroller";
+import { useTranslation } from "react-i18next";
 
 export default function TextScrollerSettings(props: {
   scrollerConfig: TextScrollerConfig;
@@ -33,13 +37,15 @@ export default function TextScrollerSettings(props: {
     newScrollerConfig: Partial<TextScrollerConfig>
   ) => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex-1 h-0 overflow-y-auto rounded-lg shadow-sm border p-5">
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-2">
-          <div className="font-bold">Background Setting</div>
+          <div className="font-bold">{t("editor.background.name")}</div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>背景颜色</span>
+            <span>{t("editor.background.color")}</span>
             <input
               type="color"
               value={props.scrollerConfig.backgroundColor}
@@ -54,9 +60,9 @@ export default function TextScrollerSettings(props: {
         </div>
         <Separator className="w-full my-1" />
         <div className="flex flex-col gap-2">
-          <div className="font-bold">Font Setting</div>
+          <div className="font-bold">{t("editor.font.name")}</div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>文字颜色</span>
+            <span>{t("editor.font.color")}</span>
             <input
               type="color"
               value={props.scrollerConfig.textColor}
@@ -69,7 +75,7 @@ export default function TextScrollerSettings(props: {
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>斜体</span>
+            <span>{t("editor.font.italic")}</span>
             <Switch
               checked={props.scrollerConfig.italic}
               onCheckedChange={(italicEnabled) =>
@@ -80,7 +86,7 @@ export default function TextScrollerSettings(props: {
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>文字粗细</span>
+            <span>{t("editor.font.weight")}</span>
             <Select
               value={props.scrollerConfig.fontWeight as string}
               onValueChange={(newFontWeight) =>
@@ -106,7 +112,7 @@ export default function TextScrollerSettings(props: {
             </Select>
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>字体大小</span>
+            <span>{t("editor.font.size")}</span>
             <Select
               value={props.scrollerConfig.fontSizePercentage}
               onValueChange={(newFontSizePercentage) => {
@@ -130,9 +136,9 @@ export default function TextScrollerSettings(props: {
         </div>
         <Separator className="w-full my-1" />
         <div className="flex flex-col gap-2">
-          <div className="font-bold">Effect</div>
+          <div className="font-bold">{t("editor.effect.name")}</div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>发光</span>
+            <span>{t("editor.effect.glow")}</span>
             <Switch
               checked={props.scrollerConfig.glow}
               onCheckedChange={(newGlow) =>
@@ -143,7 +149,7 @@ export default function TextScrollerSettings(props: {
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>发光强度</span>
+            <span>{t("editor.effect.glowIntensity")}</span>
             <Tabs
               value={props.scrollerConfig.glowIntensity}
               onValueChange={(newGlowIntensity) => {
@@ -158,25 +164,28 @@ export default function TextScrollerSettings(props: {
                   value={GlowIntensity.Weak}
                   disabled={!props.scrollerConfig.glow}
                 >
-                  Weak
+                  <WifiLow className="w-4 h-4 mr-2" />
+                  {t("intensity.weak")}
                 </TabsTrigger>
                 <TabsTrigger
                   value={GlowIntensity.Medium}
                   disabled={!props.scrollerConfig.glow}
                 >
-                  Medium
+                  <WifiHigh className="w-4 h-4 mr-2" />
+                  {t("intensity.medium")}
                 </TabsTrigger>
                 <TabsTrigger
                   value={GlowIntensity.Strong}
                   disabled={!props.scrollerConfig.glow}
                 >
-                  Strong
+                  <Wifi className="w-4 h-4 mr-2" />
+                  {t("intensity.strong")}
                 </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>闪烁</span>
+            <span>{t("editor.effect.blink")}</span>
             <Switch
               checked={props.scrollerConfig.blink}
               onCheckedChange={(newBlink) =>
@@ -187,7 +196,7 @@ export default function TextScrollerSettings(props: {
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>闪烁频率</span>
+            <span>{t("editor.effect.blinkFrequency")}</span>
             <Tabs
               value={props.scrollerConfig.blinkFrequency}
               onValueChange={(newBlinkFrequency) =>
@@ -203,28 +212,28 @@ export default function TextScrollerSettings(props: {
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Snail className="w-4 h-4 mr-2" />
-                  Slow
+                  {t("speed.slow")}
                 </TabsTrigger>
                 <TabsTrigger
                   value={BlinkFrequency.Medium}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Turtle className="w-4 h-4 mr-2" />
-                  Medium
+                  {t("speed.medium")}
                 </TabsTrigger>
                 <TabsTrigger
                   value={BlinkFrequency.Fast}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Rabbit className="w-4 h-4 mr-2" />
-                  Fast
+                  {t("speed.fast")}
                 </TabsTrigger>
                 <TabsTrigger
                   value={BlinkFrequency.UltraFast}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Rocket className="w-4 h-4 mr-2" />
-                  Ultra Fast
+                  {t("speed.ultraFast")}
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -232,9 +241,9 @@ export default function TextScrollerSettings(props: {
         </div>
         <Separator className="w-full my-1" />
         <div className="flex flex-col gap-2">
-          <div className="font-bold">Scroll Setting</div>
+          <div className="font-bold">{t("editor.scroll.name")}</div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>滚动方向</span>
+            <span>{t("editor.scroll.scrollDirection")}</span>
             <Tabs
               value={props.scrollerConfig.scrollDirection}
               onValueChange={(newScrollDirection) =>
@@ -247,25 +256,25 @@ export default function TextScrollerSettings(props: {
               <TabsList>
                 <TabsTrigger value={Direction.Up}>
                   <ArrowUp className="w-4 h-4 mr-2" />
-                  Up
+                  {t("direction.up")}
                 </TabsTrigger>
                 <TabsTrigger value={Direction.Down}>
                   <ArrowDown className="w-4 h-4 mr-2" />
-                  Down
+                  {t("direction.down")}
                 </TabsTrigger>
                 <TabsTrigger value={Direction.Left}>
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Left{" "}
+                  {t("direction.left")}
                 </TabsTrigger>
                 <TabsTrigger value={Direction.Right}>
                   <ArrowRight className="w-4 h-4 mr-2" />
-                  Right
+                  {t("direction.right")}
                 </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>文字方向</span>
+            <span>{t("editor.scroll.textDirection")}</span>
             <Tabs
               value={props.scrollerConfig.textDirection}
               onValueChange={(newTextDirection) =>
@@ -278,25 +287,25 @@ export default function TextScrollerSettings(props: {
               <TabsList>
                 <TabsTrigger value={Direction.Up}>
                   <Type className="w-4 h-4 mr-2 rotate-180" />
-                  Up
+                  {t("direction.up")}
                 </TabsTrigger>
                 <TabsTrigger value={Direction.Down}>
                   <Type className="w-4 h-4 mr-2" />
-                  Down
+                  {t("direction.down")}
                 </TabsTrigger>
                 <TabsTrigger value={Direction.Left}>
                   <Type className="w-4 h-4 mr-2 rotate-90" />
-                  Left{" "}
+                  {t("direction.left")}
                 </TabsTrigger>
                 <TabsTrigger value={Direction.Right}>
                   <Type className="w-4 h-4 mr-2 -rotate-90" />
-                  Right
+                  {t("direction.right")}
                 </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
-            <span>滚动速度</span>
+            <span>{t("editor.scroll.scrollSpeed")}</span>
             <Tabs
               value={props.scrollerConfig.scrollSpeed}
               onValueChange={(newScrollSpeed) =>
@@ -309,15 +318,15 @@ export default function TextScrollerSettings(props: {
               <TabsList>
                 <TabsTrigger value={ScrollSpeed.Slow}>
                   <Snail className="w-4 h-4 mr-2" />
-                  Slow
+                  {t("speed.slow")}
                 </TabsTrigger>
                 <TabsTrigger value={ScrollSpeed.Medium}>
                   <Turtle className="w-4 h-4 mr-2" />
-                  Medium
+                  {t("speed.medium")}
                 </TabsTrigger>
                 <TabsTrigger value={ScrollSpeed.Fast}>
                   <Rabbit className="w-4 h-4 mr-2" />
-                  Fast
+                  {t("speed.fast")}
                 </TabsTrigger>
               </TabsList>
             </Tabs>

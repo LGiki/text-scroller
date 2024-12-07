@@ -8,6 +8,8 @@ import { useHistoryScollersStore } from "@/stores/useHistoryScrollersStore";
 import ScrollerListSheet from "./scroller-list-sheet";
 import { useFavoriteScollersStore } from "@/stores/useFavoriteScrollersStore";
 import { toast } from "sonner";
+import { LanguageToggle } from "./language-toggle";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const [isHistorySheetVisible, setIsHistorySheetVisible] =
@@ -17,6 +19,8 @@ export default function Header() {
 
   const historyScrollersStore = useHistoryScollersStore();
   const favoriteScrollersStore = useFavoriteScollersStore();
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -133,6 +137,8 @@ export default function Header() {
             size="icon"
             variant="outline"
             onClick={() => setIsFavoriteSheetVisible(true)}
+            title={t("favorite")}
+            aria-label={t("favorite")}
           >
             <Sparkles />
           </Button>
@@ -140,11 +146,19 @@ export default function Header() {
             size="icon"
             variant="outline"
             onClick={() => setIsHistorySheetVisible(true)}
+            title={t("history")}
+            aria-label={t("history")}
           >
             <History />
           </Button>
+          <LanguageToggle />
           <DarkModeToggle />
-          <a href="https://github.com/LGiki/text-scroller" target="_blank">
+          <a
+            href="https://github.com/LGiki/text-scroller"
+            target="_blank"
+            title="Github"
+            aria-label="Github"
+          >
             <Button size="icon" variant="outline">
               <SiGithub />
             </Button>
@@ -157,16 +171,16 @@ export default function Header() {
         scrollersStore={favoriteScrollersStore}
         onDeleteAllClick={() => {
           favoriteScrollersStore.removeAll();
-          toast.success("All items deleted.");
+          toast.success(t("toast.allScrollerDeleted"));
         }}
         onDeleteItemClick={(id) => {
           favoriteScrollersStore.remove(id);
-          toast.success("Item deleted.");
+          toast.success(t("toast.scrollerDeleted"));
         }}
       >
         <div className="flex gap-2 items-center">
           <Sparkles className="w-4 h-4" />
-          Favorite
+          {t("favorite")}
         </div>
       </ScrollerListSheet>
       <ScrollerListSheet
@@ -175,16 +189,16 @@ export default function Header() {
         scrollersStore={historyScrollersStore}
         onDeleteAllClick={() => {
           historyScrollersStore.removeAll();
-          toast.success("All items deleted.");
+          toast.success(t("toast.allScrollerDeleted"));
         }}
         onDeleteItemClick={(id) => {
           historyScrollersStore.remove(id);
-          toast.success("Item deleted.");
+          toast.success(t("toast.scrollerDeleted"));
         }}
       >
         <div className="flex gap-2 items-center">
           <History className="w-4 h-4" />
-          History
+          {t("history")}
         </div>
       </ScrollerListSheet>
     </>

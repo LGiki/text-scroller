@@ -1,0 +1,76 @@
+{
+    "play": "播放",
+    "reset": "重設",
+    "favorite": "收藏",
+    "clear": "清除",
+    "scrollerTextInputPlacerholder": "請輸入您的文字...",
+    "history": "歷史紀錄",
+    "delete": "刪除",
+    "edit": "編輯",
+    "deleteAll": "全部刪除",
+    "confirm": "確認",
+    "cancel": "取消",
+    "confirmDelete": "確認刪除",
+    "noData": "目前無資料",
+    "language": "語言",
+    "direction": {
+        "up": "上",
+        "down": "下",
+        "left": "左",
+        "right": "右"
+    },
+    "speed": {
+        "slow": "緩慢",
+        "medium": "正常",
+        "fast": "快速",
+        "ultraFast": "超快速"
+    },
+    "intensity": {
+        "weak": "微弱",
+        "medium": "中等",
+        "strong": "強烈"
+    },
+    "darkMode": {
+        "light": "亮色模式",
+        "dark": "深色模式",
+        "system": "跟隨系統",
+        "toggleTheme": "切換主題"
+    },
+    "editor": {
+        "background": {
+            "name": "背景設定",
+            "color": "背景顏色"
+        },
+        "font": {
+            "name": "文字設定",
+            "color": "文字顏色",
+            "italic": "斜體",
+            "weight": "文字粗細",
+            "size": "文字大小"
+        },
+        "effect": {
+            "name": "特效",
+            "glow": "發光",
+            "glowIntensity": "發光強度",
+            "blink": "閃爍",
+            "blinkFrequency": "閃爍頻率"
+        },
+        "scroll": {
+            "name": "捲動設定",
+            "scrollDirection": "捲動方向",
+            "textDirection": "文字方向",
+            "scrollSpeed": "捲動速度"
+        }
+    },
+    "toast": {
+        "scrollerDeleted": "捲動元件已刪除",
+        "allScrollerDeleted": "所有捲動元件已刪除",
+        "emptyScrollerContent": "捲動元件內容為空"
+    },
+    "dialog": {
+        "deleteAll": {
+            "title": "確認全部刪除",
+            "description": "您確定要刪除所有項目嗎？此操作無法復原，將永久刪除所有項目。"
+        }
+    }
+}

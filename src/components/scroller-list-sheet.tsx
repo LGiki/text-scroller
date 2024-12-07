@@ -10,7 +10,7 @@ import { ScrollersState } from "@/stores/createScrollersStore";
 import React, { useState } from "react";
 import ScollerListItem from "@/components/scroller-list-item";
 import TextScrollerCanvas from "@/components/text-scroller-canvas";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Cat, Trash2 } from "lucide-react";
 import {
   AlertDialog,
@@ -23,6 +23,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { useScrollerEditorStore } from "@/stores/useScrollerEditorStore";
+import { useTranslation } from "react-i18next";
 
 export default function ScrollerListSheet(props: {
   open: boolean;
@@ -34,6 +36,9 @@ export default function ScrollerListSheet(props: {
 }) {
   const [isDeleteAllConfirmDialogVisible, setIsDeleteAllConfirmDialogVisible] =
     useState<boolean>(false);
+  const scrollerEditorStore = useScrollerEditorStore();
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -55,7 +60,14 @@ export default function ScrollerListSheet(props: {
                   title={scroller.scrollerConfig.scrollerText}
                   key={scroller.id}
                   className="flex-shrink-0"
-                  onDeleteClick={() => props.onDeleteItemClick?.(scroller.id)}
+                  onDeleteClick={() => {
+                    props.scrollersStore.remove(scroller.id);
+                  }}
+                  onEditClick={() => {
+                    scrollerEditorStore.setScrollerConfig(
+                      scroller.scrollerConfig
+                    );
+                  }}
                 >
                   <TextScrollerCanvas
                     scrollerConfig={scroller.scrollerConfig}
@@ -65,7 +77,7 @@ export default function ScrollerListSheet(props: {
             ) : (
               <div className="flex flex-col text-slate-500 items-center justify-center flex-1 h-0 gap-1">
                 <Cat className="h-6 w-6" />
-                <span>No Data</span>
+                <span>{t('noData')}</span>
               </div>
             )}
           </div>
@@ -78,7 +90,7 @@ export default function ScrollerListSheet(props: {
                   onClick={() => setIsDeleteAllConfirmDialogVisible(true)}
                 >
                   <Trash2 />
-                  Delete All
+                  {t("deleteAll")}
                 </Button>
               </SheetFooter>
             )}
@@ -90,16 +102,20 @@ export default function ScrollerListSheet(props: {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("dialog.deleteAll.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete all
-              data.
+              {t("dialog.deleteAll.description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={props.onDeleteAllClick}>
-              Delete
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={props.onDeleteAllClick}
+              className={buttonVariants({ variant: "destructive" })}
+              title={t("deleteAll")}
+              aria-label={t("deleteAll")}
+            >
+              {t("deleteAll")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
