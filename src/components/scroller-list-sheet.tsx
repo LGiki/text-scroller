@@ -38,7 +38,7 @@ export default function ScrollerListSheet(props: {
   const [isDeleteAllConfirmDialogVisible, setIsDeleteAllConfirmDialogVisible] =
     useState<boolean>(false);
   const scrollerEditorStore = useScrollerEditorStore();
-  const scrollerInstanceStore = useScrollerInstanceStore()
+  const scrollerInstanceStore = useScrollerInstanceStore();
 
   const { t } = useTranslation();
 
@@ -47,7 +47,7 @@ export default function ScrollerListSheet(props: {
       <Sheet open={props.open} onOpenChange={props.onOpenChange}>
         <SheetContent
           side="left"
-          className="flex flex-col gap-2 h-full bg-[#faf9f8]"
+          className="flex flex-col gap-2 h-full"
         >
           <SheetHeader>
             <SheetTitle>{props.children}</SheetTitle>
@@ -64,19 +64,19 @@ export default function ScrollerListSheet(props: {
                   key={scroller.id}
                   className="flex-shrink-0"
                   onDeleteClick={() => {
-                    props.scrollersStore.remove(scroller.id);
+                    props.onDeleteItemClick?.(scroller.id);
                   }}
                   onEditClick={() => {
                     scrollerEditorStore.setScrollerConfig(
                       scroller.scrollerConfig
                     );
-                    props.onOpenChange(false)
+                    props.onOpenChange(false);
                   }}
                   onPlayClick={() => {
                     scrollerInstanceStore.showScrollerWithConfig(
                       scroller.scrollerConfig
                     );
-                    props.onOpenChange(false)
+                    props.onOpenChange(false);
                   }}
                 >
                   <TextScrollerCanvas
@@ -87,7 +87,7 @@ export default function ScrollerListSheet(props: {
             ) : (
               <div className="flex flex-col text-slate-500 items-center justify-center flex-1 h-0 gap-1">
                 <Cat className="h-6 w-6" />
-                <span>{t('noData')}</span>
+                <span>{t("noData")}</span>
               </div>
             )}
           </div>

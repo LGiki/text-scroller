@@ -25,29 +25,30 @@ export default function Header() {
   return (
     <>
       <div className="border-b flex h-12 items-center justify-between px-4">
-        <div className="flex gap-2 items-center group">
+        <div className="flex gap-2 items-center group flex-shrink-0">
           <img
             src="icons/logo.svg"
-            className="w-[25px] h-[25px] group-hover:brightness-110 duration-200 ease-in-out transition-all group-hover:drop-shadow-sm"
+            className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px] group-hover:brightness-110 duration-200 ease-in-out transition-all group-hover:drop-shadow-sm"
             title={`${DEFAULT_TITLE} Logo`}
             aria-label={`${DEFAULT_TITLE} Logo`}
           />
           <h1
-            className="font-['Oxanium_Variable'] text-lg font-bold transition-all duration-200 ease-in-out group-hover:drop-shadow-sm group-hover:bg-gradient-to-l group-hover:from-pink-300 group-hover:via-fuchsia-400 group-hover:to-pink-500 group-hover:bg-clip-text group-hover:text-transparent"
+            className="font-['Oxanium_Variable'] sm:text-lg font-bold transition-all duration-200 ease-in-out group-hover:drop-shadow-sm group-hover:bg-gradient-to-l group-hover:from-pink-300 group-hover:via-fuchsia-400 group-hover:to-pink-500 group-hover:bg-clip-text group-hover:text-transparent"
             title={DEFAULT_TITLE}
             aria-label={DEFAULT_TITLE}
           >
             {DEFAULT_TITLE}
           </h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1 sm:gap-2 items-center flex-1 w-0 justify-end">
           <Button
             size="icon"
             variant="outline"
             onClick={() => setIsFavoriteSheetVisible(true)}
             title={t("favorite")}
             aria-label={t("favorite")}
-          >
+            className="h-8 w-8 sm:w-9 sm:h-9"
+            >
             <Sparkles />
           </Button>
           <Button
@@ -56,7 +57,8 @@ export default function Header() {
             onClick={() => setIsHistorySheetVisible(true)}
             title={t("history")}
             aria-label={t("history")}
-          >
+            className="h-8 w-8 sm:w-9 sm:h-9"
+            >
             <History />
           </Button>
           <LanguageToggle />
@@ -67,7 +69,11 @@ export default function Header() {
             title="Github"
             aria-label="Github"
           >
-            <Button size="icon" variant="outline">
+            <Button
+              size="icon"
+              variant="outline"
+              className="h-8 w-8 sm:w-9 sm:h-9"
+              >
               <SiGithub />
             </Button>
           </a>
@@ -106,7 +112,7 @@ export default function Header() {
       >
         <div className="flex gap-2 items-center">
           <History className="w-4 h-4" />
-          {t("history")}
+          <span>{t("history")}</span>
         </div>
       </ScrollerListSheet>
     </>

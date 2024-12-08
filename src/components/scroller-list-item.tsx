@@ -22,7 +22,7 @@ export default function ScollerListItem(props: {
   return (
     <div
       className={cn(
-        "flex flex-col h-[200px] w-full gap-2 border rounded-xl shadow-sm p-3 bg-white",
+        "flex flex-col h-[200px] w-full gap-2 border rounded-xl shadow p-3",
         props.className
       )}
     >
