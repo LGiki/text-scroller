@@ -60,6 +60,7 @@ export default function ScrollerListSheet(props: {
               props.scrollersStore.scrollers.map((scroller) => (
                 <ScollerListItem
                   title={scroller.scrollerConfig.scrollerText}
+                  createdAt={scroller.createdAt}
                   key={scroller.id}
                   className="flex-shrink-0"
                   onDeleteClick={() => {

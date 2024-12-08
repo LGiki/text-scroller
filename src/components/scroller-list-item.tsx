@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 export default function ScollerListItem(props: {
   title: string;
+  createdAt?: string;
   children?: React.ReactNode;
   onPlayClick?: () => void;
   onEditClick?: () => void;
@@ -26,12 +27,24 @@ export default function ScollerListItem(props: {
       )}
     >
       <div className="flex gap-4 justify-between items-center">
-        <span
-          title={props.title}
-          className="font-bold whitespace-pre-line line-clamp-1 break-all"
-        >
-          {props.title}
-        </span>
+        <div className="flex flex-col">
+          <span
+            title={props.title}
+            aria-label={props.title}
+            className="font-bold text-sm whitespace-pre-line line-clamp-1 break-all"
+          >
+            {props.title}
+          </span>
+          {props.createdAt && (
+            <span
+              className="text-xs text-primary/50 whitespace-pre-line line-clamp-1 break-all"
+              title={props.createdAt}
+              aria-label={props.createdAt}
+            >
+              {props.createdAt}
+            </span>
+          )}
+        </div>
         <div className="flex gap-2 items-center flex-shrink-0">
           <Button
             size="icon"
