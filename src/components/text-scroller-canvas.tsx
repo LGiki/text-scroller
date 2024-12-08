@@ -269,6 +269,9 @@ export default function TextScrollerCanvas(props: {
   return (
     <canvas
       className={cn("w-full h-full", props.className)}
+      style={{
+        transform: "translate3d(0,0,0)",
+      }}
       ref={canvasRef}
       onClick={props.onClick}
     />
