@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/oxanium':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@icons-pack/react-simple-icons':
         specifier: ^10.2.0
         version: 10.2.0(react@18.3.1)
@@ -421,6 +424,9 @@ packages:
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
+
+  '@fontsource-variable/oxanium@5.1.0':
+    resolution: {integrity: sha512-hd6sNp5qrnBGQAipw4VkQr5Z31k7wIrNWujMM/A5Vey525wfOVErj07IXCmRInfv06puR/OCGp8E9vrqCsYNXQ==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2412,6 +2418,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.8': {}
+
+  '@fontsource-variable/oxanium@5.1.0': {}
 
   '@humanfs/core@0.19.1': {}
 
