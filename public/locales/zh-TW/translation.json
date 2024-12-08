@@ -65,7 +65,8 @@
     "toast": {
         "scrollerDeleted": "捲動元件已刪除",
         "allScrollerDeleted": "所有捲動元件已刪除",
-        "emptyScrollerContent": "捲動元件內容為空"
+        "emptyScrollerContent": "捲動元件內容為空",
+        "addedToFavoriteScrollers": "已添加到收藏"
     },
     "dialog": {
         "deleteAll": {

@@ -97,6 +97,7 @@ export default function App() {
                   return;
                 }
                 favoriteScollersStore.add(scrollerEditorStore.scrollerConfig);
+                toast.success(t("toast.addedToFavoriteScrollers"))
               }}
             >
               <Star />

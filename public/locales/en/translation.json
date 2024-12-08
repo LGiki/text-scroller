@@ -65,7 +65,8 @@
     "toast": {
         "scrollerDeleted": "Scroller deleted",
         "allScrollerDeleted": "All scroller deleted",
-        "emptyScrollerContent": "The scroller content is empty"
+        "emptyScrollerContent": "The scroller content is empty",
+        "addedToFavoriteScrollers": "Successfully added to favorite scrollers"
     },
     "dialog": {
         "deleteAll": {

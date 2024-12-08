@@ -65,7 +65,8 @@
     "toast": {
         "scrollerDeleted": "滚动条已删除",
         "allScrollerDeleted": "所有滚动条已删除",
-        "emptyScrollerContent": "滚动条内容为空"
+        "emptyScrollerContent": "滚动条内容为空",
+        "addedToFavoriteScrollers": "已添加到收藏"
     },
     "dialog": {
         "deleteAll": {
