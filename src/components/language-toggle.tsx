@@ -14,7 +14,13 @@ export function LanguageToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" title={t("language")}>
+        <Button
+          variant="outline"
+          size="icon"
+          title={t("language")}
+          aria-label={t("language")}
+          className="h-8 w-8 sm:w-9 sm:h-9"
+        >
           <Languages />
         </Button>
       </DropdownMenuTrigger>

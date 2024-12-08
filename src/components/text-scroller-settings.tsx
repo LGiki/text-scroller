@@ -54,6 +54,8 @@ export default function TextScrollerSettings(props: {
                 })
               }
               className="appearance-none h-[22px] w-[50px] p-0 rounded shadow-sm"
+              title={t("editor.background.color")}
+              aria-label={t("editor.background.color")}
             />
           </div>
         </div>
@@ -71,6 +73,8 @@ export default function TextScrollerSettings(props: {
                 })
               }
               className="appearance-none h-[22px] w-[50px] p-0 rounded shadow-sm"
+              title={t("editor.font.color")}
+              aria-label={t("editor.font.color")}
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
@@ -82,6 +86,8 @@ export default function TextScrollerSettings(props: {
                   italic: italicEnabled,
                 })
               }
+              title={t("editor.font.italic")}
+              aria-label={t("editor.font.italic")}
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
@@ -94,7 +100,11 @@ export default function TextScrollerSettings(props: {
                 })
               }
             >
-              <SelectTrigger className="w-[200px]">
+              <SelectTrigger
+                className="w-[200px]"
+                title={t("editor.font.weight")}
+                aria-label={t("editor.font.weight")}
+              >
                 <SelectValue placeholder="Font Weight" />
               </SelectTrigger>
               <SelectContent>
@@ -103,6 +113,8 @@ export default function TextScrollerSettings(props: {
                     value={`${(i + 1) * 100}`}
                     key={`fontWeight-${i}`}
                     style={{ fontWeight: (i + 1) * 100 }}
+                    title={`${(i + 1) * 100}`}
+                    aria-label={`${(i + 1) * 100}`}
                   >
                     {(i + 1) * 100}
                   </SelectItem>
@@ -120,12 +132,21 @@ export default function TextScrollerSettings(props: {
                 });
               }}
             >
-              <SelectTrigger className="w-[200px]">
+              <SelectTrigger
+                className="w-[200px]"
+                title={t("editor.font.size")}
+                aria-label={t("editor.font.size")}
+              >
                 <SelectValue placeholder="Font Size" />
               </SelectTrigger>
               <SelectContent>
                 {[...Array(10)].map((_, i) => (
-                  <SelectItem value={`${(i + 1) * 10}`} key={`fontSize-${i}`}>
+                  <SelectItem
+                    value={`${(i + 1) * 10}`}
+                    key={`fontSize-${i}`}
+                    title={`${(i + 1) * 10}%`}
+                    aria-label={`${(i + 1) * 10}%`}
+                  >
                     {(i + 1) * 10}%
                   </SelectItem>
                 ))}
@@ -145,6 +166,8 @@ export default function TextScrollerSettings(props: {
                   glow: newGlow,
                 })
               }
+              title={t("editor.effect.glow")}
+              aria-label={t("editor.effect.glow")}
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
@@ -162,6 +185,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={GlowIntensity.Weak}
                   disabled={!props.scrollerConfig.glow}
+                  title={t("intensity.weak")}
+                  aria-label={t("intensity.weak")}
                 >
                   <WifiLow className="w-4 h-4 mr-2" />
                   {t("intensity.weak")}
@@ -169,6 +194,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={GlowIntensity.Medium}
                   disabled={!props.scrollerConfig.glow}
+                  title={t("intensity.medium")}
+                  aria-label={t("intensity.medium")}
                 >
                   <WifiHigh className="w-4 h-4 mr-2" />
                   {t("intensity.medium")}
@@ -176,6 +203,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={GlowIntensity.Strong}
                   disabled={!props.scrollerConfig.glow}
+                  title={t("intensity.strong")}
+                  aria-label={t("intensity.strong")}
                 >
                   <Wifi className="w-4 h-4 mr-2" />
                   {t("intensity.strong")}
@@ -192,6 +221,8 @@ export default function TextScrollerSettings(props: {
                   blink: newBlink,
                 })
               }
+              title={t("editor.effect.blink")}
+              aria-label={t("editor.effect.blink")}
             />
           </div>
           <div className="flex justify-between items-center min-h-9 flex-wrap gap-2">
@@ -209,6 +240,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={Speed.Slow}
                   disabled={!props.scrollerConfig.blink}
+                  title={t("speed.slow")}
+                  aria-label={t("speed.slow")}
                 >
                   <Snail className="w-4 h-4 mr-2" />
                   {t("speed.slow")}
@@ -216,6 +249,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={Speed.Medium}
                   disabled={!props.scrollerConfig.blink}
+                  title={t("speed.medium")}
+                  aria-label={t("speed.medium")}
                 >
                   <Turtle className="w-4 h-4 mr-2" />
                   {t("speed.medium")}
@@ -223,6 +258,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={Speed.Fast}
                   disabled={!props.scrollerConfig.blink}
+                  title={t("speed.fast")}
+                  aria-label={t("speed.fast")}
                 >
                   <Rabbit className="w-4 h-4 mr-2" />
                   {t("speed.fast")}
@@ -230,6 +267,8 @@ export default function TextScrollerSettings(props: {
                 <TabsTrigger
                   value={Speed.UltraFast}
                   disabled={!props.scrollerConfig.blink}
+                  title={t("speed.ultraFast")}
+                  aria-label={t("speed.ultraFast")}
                 >
                   <Rocket className="w-4 h-4 mr-2" />
                   {t("speed.ultraFast")}
@@ -253,19 +292,35 @@ export default function TextScrollerSettings(props: {
               className="overflow-x-auto"
             >
               <TabsList>
-                <TabsTrigger value={Direction.Up}>
+                <TabsTrigger
+                  value={Direction.Up}
+                  title={t("direction.up")}
+                  aria-label={t("direction.up")}
+                >
                   <ArrowUp className="w-4 h-4 mr-2" />
                   {t("direction.up")}
                 </TabsTrigger>
-                <TabsTrigger value={Direction.Down}>
+                <TabsTrigger
+                  value={Direction.Down}
+                  title={t("direction.down")}
+                  aria-label={t("direction.down")}
+                >
                   <ArrowDown className="w-4 h-4 mr-2" />
                   {t("direction.down")}
                 </TabsTrigger>
-                <TabsTrigger value={Direction.Left}>
+                <TabsTrigger
+                  value={Direction.Left}
+                  title={t("direction.left")}
+                  aria-label={t("direction.left")}
+                >
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   {t("direction.left")}
                 </TabsTrigger>
-                <TabsTrigger value={Direction.Right}>
+                <TabsTrigger
+                  value={Direction.Right}
+                  title={t("direction.right")}
+                  aria-label={t("direction.right")}
+                >
                   <ArrowRight className="w-4 h-4 mr-2" />
                   {t("direction.right")}
                 </TabsTrigger>
@@ -284,19 +339,35 @@ export default function TextScrollerSettings(props: {
               className="overflow-x-auto"
             >
               <TabsList>
-                <TabsTrigger value={Direction.Up}>
+                <TabsTrigger
+                  value={Direction.Up}
+                  title={t("direction.up")}
+                  aria-label={t("direction.up")}
+                >
                   <Type className="w-4 h-4 mr-2 rotate-180" />
                   {t("direction.up")}
                 </TabsTrigger>
-                <TabsTrigger value={Direction.Down}>
+                <TabsTrigger
+                  value={Direction.Down}
+                  title={t("direction.down")}
+                  aria-label={t("direction.down")}
+                >
                   <Type className="w-4 h-4 mr-2" />
                   {t("direction.down")}
                 </TabsTrigger>
-                <TabsTrigger value={Direction.Left}>
+                <TabsTrigger
+                  value={Direction.Left}
+                  title={t("direction.left")}
+                  aria-label={t("direction.left")}
+                >
                   <Type className="w-4 h-4 mr-2 rotate-90" />
                   {t("direction.left")}
                 </TabsTrigger>
-                <TabsTrigger value={Direction.Right}>
+                <TabsTrigger
+                  value={Direction.Right}
+                  title={t("direction.right")}
+                  aria-label={t("direction.right")}
+                >
                   <Type className="w-4 h-4 mr-2 -rotate-90" />
                   {t("direction.right")}
                 </TabsTrigger>
@@ -315,19 +386,35 @@ export default function TextScrollerSettings(props: {
               className="overflow-x-auto"
             >
               <TabsList>
-                <TabsTrigger value={Speed.Slow}>
+                <TabsTrigger
+                  value={Speed.Slow}
+                  title={t("speed.slow")}
+                  aria-label={t("speed.slow")}
+                >
                   <Snail className="w-4 h-4 mr-2" />
                   {t("speed.slow")}
                 </TabsTrigger>
-                <TabsTrigger value={Speed.Medium}>
+                <TabsTrigger
+                  value={Speed.Medium}
+                  title={t("speed.medium")}
+                  aria-label={t("speed.medium")}
+                >
                   <Turtle className="w-4 h-4 mr-2" />
                   {t("speed.medium")}
                 </TabsTrigger>
-                <TabsTrigger value={Speed.Fast}>
+                <TabsTrigger
+                  value={Speed.Fast}
+                  title={t("speed.fast")}
+                  aria-label={t("speed.fast")}
+                >
                   <Rabbit className="w-4 h-4 mr-2" />
                   {t("speed.fast")}
                 </TabsTrigger>
-                <TabsTrigger value={Speed.UltraFast}>
+                <TabsTrigger
+                  value={Speed.UltraFast}
+                  title={t("speed.ultraFast")}
+                  aria-label={t("speed.ultraFast")}
+                >
                   <Rocket className="w-4 h-4 mr-2" />
                   {t("speed.ultraFast")}
                 </TabsTrigger>
