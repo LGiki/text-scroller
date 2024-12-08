@@ -6,7 +6,7 @@ import {
   SheetFooter,
   SheetDescription,
 } from "@/components/ui/sheet";
-import { ScrollersState } from "@/stores/createScrollersStore";
+import { ScrollersState } from "@/stores/create-scrollers-store";
 import React, { useState } from "react";
 import ScollerListItem from "@/components/scroller-list-item";
 import TextScrollerCanvas from "@/components/text-scroller-canvas";
@@ -23,9 +23,9 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useScrollerEditorStore } from "@/stores/useScrollerEditorStore";
+import { useScrollerEditorStore } from "@/stores/use-scroller-editor-store";
 import { useTranslation } from "react-i18next";
-import { useScrollerInstanceStore } from "@/stores/useScrollerInstanceStore";
+import { useScrollerInstanceStore } from "@/stores/use-scroller-instance-store";
 
 export default function ScrollerListSheet(props: {
   open: boolean;
