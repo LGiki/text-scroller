@@ -25,6 +25,7 @@ import {
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useScrollerEditorStore } from "@/stores/useScrollerEditorStore";
 import { useTranslation } from "react-i18next";
+import { useScrollerInstanceStore } from "@/stores/useScrollerInstanceStore";
 
 export default function ScrollerListSheet(props: {
   open: boolean;
@@ -37,6 +38,7 @@ export default function ScrollerListSheet(props: {
   const [isDeleteAllConfirmDialogVisible, setIsDeleteAllConfirmDialogVisible] =
     useState<boolean>(false);
   const scrollerEditorStore = useScrollerEditorStore();
+  const scrollerInstanceStore = useScrollerInstanceStore()
 
   const { t } = useTranslation();
 
@@ -67,6 +69,13 @@ export default function ScrollerListSheet(props: {
                     scrollerEditorStore.setScrollerConfig(
                       scroller.scrollerConfig
                     );
+                    props.onOpenChange(false)
+                  }}
+                  onPlayClick={() => {
+                    scrollerInstanceStore.showScrollerWithConfig(
+                      scroller.scrollerConfig
+                    );
+                    props.onOpenChange(false)
                   }}
                 >
                   <TextScrollerCanvas

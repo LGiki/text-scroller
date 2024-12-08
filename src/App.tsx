@@ -1,16 +1,18 @@
-import { Button } from "./components/ui/button";
-import { Textarea } from "./components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { Eraser, Play, RotateCcw, Star } from "lucide-react";
-import Header from "./components/header";
+import Header from "@/components/header";
 import TextScrollerCanvas from "@/components/text-scroller-canvas";
 import TextScrollerSettings from "@/components/text-scroller-settings";
 import { useHistoryScollersStore } from "@/stores/useHistoryScrollersStore";
 import { useScrollerInstanceStore } from "@/stores/useScrollerInstanceStore";
-import { useScrollerEditorStore } from "./stores/useScrollerEditorStore";
+import { useScrollerEditorStore } from "@/stores/useScrollerEditorStore";
 import { toast } from "sonner";
-import { Separator } from "./components/ui/separator";
-import { useFavoriteScollersStore } from "./stores/useFavoriteScrollersStore";
+import { Separator } from "@/components/ui/separator";
+import { useFavoriteScollersStore } from "@/stores/useFavoriteScrollersStore";
 import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from "react";
+import useFullScreen from "@/hooks/use-full-screen";
+import { Input } from "@/components/ui/input";
 
 export default function App() {
   const historyScrollersStore = useHistoryScollersStore();
@@ -18,7 +20,22 @@ export default function App() {
   const scrollerInstanceStore = useScrollerInstanceStore();
   const scrollerEditorStore = useScrollerEditorStore();
 
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
   const { t } = useTranslation();
+
+  const { enterFullScreen, exitFullScreen } = useFullScreen(scrollerRef);
+
+  useEffect(() => {
+    if (scrollerInstanceStore.isScrollerInstanceVisible) {
+      enterFullScreen();
+    }
+  }, [enterFullScreen, scrollerInstanceStore.isScrollerInstanceVisible]);
+
+  const onScrollerClose = () => {
+    scrollerInstanceStore.hideScroller();
+    exitFullScreen();
+  };
 
   return (
     <>
@@ -49,7 +66,7 @@ export default function App() {
               }}
             >
               <Eraser />
-              {t('clear')}
+              {t("clear")}
             </Button>
           </div>
           <TextScrollerSettings
@@ -94,10 +111,9 @@ export default function App() {
                   toast.error(t("toast.emptyScrollerContent"));
                   return;
                 }
-                scrollerInstanceStore.setScrollerConfig(
+                scrollerInstanceStore.showScrollerWithConfig(
                   scrollerEditorStore.scrollerConfig
                 );
-                scrollerInstanceStore.showScroller();
                 historyScrollersStore.add(scrollerEditorStore.scrollerConfig);
               }}
               className="flex-1 w-0"
@@ -108,14 +124,15 @@ export default function App() {
           </div>
         </div>
       </div>
-      {scrollerInstanceStore.isScrollerInstanceVisible && (
-        <div className="absolute left-0 top-0 h-dvh w-screen z-[1000]">
+      <div ref={scrollerRef} className="w-[0px] h-[0px]">
+        {scrollerInstanceStore.isScrollerInstanceVisible && (
           <TextScrollerCanvas
-            onClick={scrollerInstanceStore.hideScroller}
+            className="absolute left-0 top-0 h-dvh w-screen z-[9999]"
+            onClick={onScrollerClose}
             scrollerConfig={scrollerInstanceStore.scrollerConfig}
           />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

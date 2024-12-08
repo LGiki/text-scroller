@@ -5,19 +5,13 @@ export enum Direction {
     Right = 'right',
 }
 
-export enum ScrollSpeed {
-    Slow = 'slow',
-    Medium = 'medium',
-    Fast = 'fast',
-}
-
 export enum GlowIntensity {
     Weak = 'weak',
     Medium = 'medium',
     Strong = 'strong',
 }
 
-export enum BlinkFrequency {
+export enum Speed {
     Slow = 'slow',
     Medium = 'medium',
     Fast = 'fast',
@@ -34,10 +28,10 @@ export interface TextScrollerConfig {
     glow: boolean
     glowIntensity: GlowIntensity
     blink: boolean
-    blinkFrequency: BlinkFrequency
+    blinkFrequency: Speed
     scrollDirection: Direction
     textDirection: Direction
-    scrollSpeed: ScrollSpeed
+    scrollSpeed: Speed
 }
 
 export interface ScrollerConfigState {

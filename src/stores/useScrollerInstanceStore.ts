@@ -5,6 +5,7 @@ import { INITIAL_SCROLLER_CONFIG } from "@/utils/constants";
 interface ScrollerInstanceState extends ScrollerConfigState {
     isScrollerInstanceVisible: boolean
     showScroller: () => void
+    showScrollerWithConfig: (scrollerConfig: TextScrollerConfig) => void
     hideScroller: () => void
     toggleScroller: () => void
 }
@@ -14,6 +15,12 @@ export const useScrollerInstanceStore = create<ScrollerInstanceState>()(set => (
     scrollerConfig: INITIAL_SCROLLER_CONFIG,
     showScroller: () => {
         set({
+            isScrollerInstanceVisible: true
+        })
+    },
+    showScrollerWithConfig: (scrollerConfig: TextScrollerConfig) => {
+        set({
+            scrollerConfig: scrollerConfig,
             isScrollerInstanceVisible: true
         })
     },

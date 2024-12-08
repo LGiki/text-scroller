@@ -23,10 +23,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  BlinkFrequency,
   Direction,
   GlowIntensity,
-  ScrollSpeed,
+  Speed,
   TextScrollerConfig,
 } from "@/types/text-scroller";
 import { useTranslation } from "react-i18next";
@@ -201,35 +200,35 @@ export default function TextScrollerSettings(props: {
               value={props.scrollerConfig.blinkFrequency}
               onValueChange={(newBlinkFrequency) =>
                 props.onScrollerConfigChange({
-                  blinkFrequency: newBlinkFrequency as BlinkFrequency,
+                  blinkFrequency: newBlinkFrequency as Speed,
                 })
               }
               className="overflow-x-auto"
             >
               <TabsList>
                 <TabsTrigger
-                  value={BlinkFrequency.Slow}
+                  value={Speed.Slow}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Snail className="w-4 h-4 mr-2" />
                   {t("speed.slow")}
                 </TabsTrigger>
                 <TabsTrigger
-                  value={BlinkFrequency.Medium}
+                  value={Speed.Medium}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Turtle className="w-4 h-4 mr-2" />
                   {t("speed.medium")}
                 </TabsTrigger>
                 <TabsTrigger
-                  value={BlinkFrequency.Fast}
+                  value={Speed.Fast}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Rabbit className="w-4 h-4 mr-2" />
                   {t("speed.fast")}
                 </TabsTrigger>
                 <TabsTrigger
-                  value={BlinkFrequency.UltraFast}
+                  value={Speed.UltraFast}
                   disabled={!props.scrollerConfig.blink}
                 >
                   <Rocket className="w-4 h-4 mr-2" />
@@ -310,23 +309,27 @@ export default function TextScrollerSettings(props: {
               value={props.scrollerConfig.scrollSpeed}
               onValueChange={(newScrollSpeed) =>
                 props.onScrollerConfigChange({
-                  scrollSpeed: newScrollSpeed as ScrollSpeed,
+                  scrollSpeed: newScrollSpeed as Speed,
                 })
               }
               className="overflow-x-auto"
             >
               <TabsList>
-                <TabsTrigger value={ScrollSpeed.Slow}>
+                <TabsTrigger value={Speed.Slow}>
                   <Snail className="w-4 h-4 mr-2" />
                   {t("speed.slow")}
                 </TabsTrigger>
-                <TabsTrigger value={ScrollSpeed.Medium}>
+                <TabsTrigger value={Speed.Medium}>
                   <Turtle className="w-4 h-4 mr-2" />
                   {t("speed.medium")}
                 </TabsTrigger>
-                <TabsTrigger value={ScrollSpeed.Fast}>
+                <TabsTrigger value={Speed.Fast}>
                   <Rabbit className="w-4 h-4 mr-2" />
                   {t("speed.fast")}
+                </TabsTrigger>
+                <TabsTrigger value={Speed.UltraFast}>
+                  <Rocket className="w-4 h-4 mr-2" />
+                  {t("speed.ultraFast")}
                 </TabsTrigger>
               </TabsList>
             </Tabs>

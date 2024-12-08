@@ -1,12 +1,17 @@
 import { cn } from "@/lib/utils";
 import { Direction, TextScrollerConfig } from "@/types/text-scroller";
-import { BlinkFrequencySettings } from "@/utils/constants";
-import { useEffect, useRef } from "react";
+import {
+  BlinkFrequencySettings,
+  GlowShadowBlurBaseValues,
+  ScrollSpeedSettings,
+} from "@/utils/constants";
+import { KeyboardEvent, useEffect, useRef } from "react";
 
 export default function TextScrollerCanvas(props: {
-  onClick?: () => void;
   scrollerConfig: TextScrollerConfig;
   className?: string;
+  onClick?: () => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLCanvasElement>) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -26,7 +31,7 @@ export default function TextScrollerCanvas(props: {
     let textY = canvas.height;
 
     const text = props.scrollerConfig.scrollerText;
-    const speed = 10;
+    const scrollSpeed = ScrollSpeedSettings[props.scrollerConfig.scrollSpeed];
 
     let blinkOpacity = 1;
     let blinkDirection =
@@ -51,11 +56,11 @@ export default function TextScrollerCanvas(props: {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = globalAlphaBackup;
 
-      const fontSizePercentage = parseInt(
-        props.scrollerConfig.fontSizePercentage
-      );
+      const fontSizePercentage =
+        parseInt(props.scrollerConfig.fontSizePercentage) / 100;
+
       const fontSize =
-        (fontSizePercentage / 100) *
+        fontSizePercentage *
         (props.scrollerConfig.scrollDirection === Direction.Up ||
         props.scrollerConfig.scrollDirection === Direction.Down
           ? canvas.width
@@ -82,17 +87,9 @@ export default function TextScrollerCanvas(props: {
 
       if (props.scrollerConfig.glow) {
         ctx.shadowColor = props.scrollerConfig.textColor;
-        // 10%: 5 8 11
-        // 20%: 7 10 13
-        // 30%:
-        // 40%:
-        // 50%:
-        // 60%:
-        // 70%:
-        // 80%:
-        // 90%:
-        //100%: 15 35 50
-        ctx.shadowBlur = 50;
+        ctx.shadowBlur =
+          GlowShadowBlurBaseValues[props.scrollerConfig.glowIntensity] *
+          fontSizePercentage;
       }
 
       const textMetrics = ctx.measureText(text);
@@ -159,95 +156,115 @@ export default function TextScrollerCanvas(props: {
 
       switch (props.scrollerConfig.scrollDirection) {
         case Direction.Left:
-          if (props.scrollerConfig.textDirection === Direction.Up) {
-            textX += speed;
-            if (textX > canvas.width) {
-              textX = -textWidth - canvas.width / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Left) {
-            textY += speed;
-            if (textY - canvas.width / 2 > canvas.height) {
-              textY = -textHeight * text.length - canvas.width / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Right) {
-            textY -= speed;
-            if (textY + textHeight * text.length + canvas.width / 2 < 0) {
-              textY = canvas.height + canvas.width / 2;
-            }
-          } else {
-            textX -= speed;
-            if (textX + textWidth < 0) {
-              textX = canvas.width;
-            }
+          switch (props.scrollerConfig.textDirection) {
+            case Direction.Up:
+              textX += scrollSpeed;
+              if (textX > canvas.width) {
+                textX = -textWidth - canvas.width / 2;
+              }
+              break;
+            case Direction.Left:
+              textY += scrollSpeed;
+              if (textY - canvas.width / 2 > canvas.height) {
+                textY = -textHeight * text.length - canvas.width / 2;
+              }
+              break;
+            case Direction.Right:
+              textY -= scrollSpeed;
+              if (textY + textHeight * text.length + canvas.width / 2 < 0) {
+                textY = canvas.height + canvas.width / 2;
+              }
+              break;
+            case Direction.Down:
+              textX -= scrollSpeed;
+              if (textX + textWidth < 0) {
+                textX = canvas.width;
+              }
+              break;
           }
           break;
         case Direction.Right:
-          if (props.scrollerConfig.textDirection === Direction.Up) {
-            textX -= speed;
-            if (textX + textWidth + canvas.width / 2 < 0) {
-              textX = canvas.width - canvas.width / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Left) {
-            textY -= speed;
-            if (textY + textHeight * text.length + canvas.width / 2 < 0) {
-              textY = canvas.height + canvas.width / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Right) {
-            textY += speed;
-            if (textY > canvas.height + canvas.width / 2) {
-              textY = -textHeight * text.length - canvas.width / 2;
-            }
-          } else {
-            textX += speed;
-            if (textX > canvas.width) {
-              textX = -textWidth;
-            }
+          switch (props.scrollerConfig.textDirection) {
+            case Direction.Up:
+              textX -= scrollSpeed;
+              if (textX + textWidth + canvas.width / 2 < 0) {
+                textX = canvas.width - canvas.width / 2;
+              }
+              break;
+            case Direction.Left:
+              textY -= scrollSpeed;
+              if (textY + textHeight * text.length + canvas.width / 2 < 0) {
+                textY = canvas.height + canvas.width / 2;
+              }
+              break;
+            case Direction.Right:
+              textY += scrollSpeed;
+              if (textY > canvas.height + canvas.width / 2) {
+                textY = -textHeight * text.length - canvas.width / 2;
+              }
+              break;
+            case Direction.Down:
+              textX += scrollSpeed;
+              if (textX > canvas.width) {
+                textX = -textWidth;
+              }
+              break;
           }
           break;
         case Direction.Up:
-          if (props.scrollerConfig.textDirection === Direction.Up) {
-            textY += speed;
-            if (textY > canvas.height) {
-              textY = -textHeight * text.length - canvas.height / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Left) {
-            textX -= speed;
-            if (textX + textWidth + canvas.height / 2 < 0) {
-              textX = canvas.width + canvas.height / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Right) {
-            textX += speed;
-            if (textX > canvas.width + canvas.height / 2) {
-              textX = -textWidth - canvas.height / 2;
-            }
-          } else {
-            textY -= speed;
-            if (textY + textHeight * text.length < 0) {
-              textY = canvas.height;
-            }
+          switch (props.scrollerConfig.textDirection) {
+            case Direction.Up:
+              textY += scrollSpeed;
+              if (textY > canvas.height) {
+                textY = -textHeight * text.length - canvas.height / 2;
+              }
+              break;
+            case Direction.Left:
+              textX -= scrollSpeed;
+              if (textX + textWidth + canvas.height / 2 < 0) {
+                textX = canvas.width + canvas.height / 2;
+              }
+              break;
+            case Direction.Right:
+              textX += scrollSpeed;
+              if (textX > canvas.width + canvas.height / 2) {
+                textX = -textWidth - canvas.height / 2;
+              }
+              break;
+            case Direction.Down:
+              textY -= scrollSpeed;
+              if (textY + textHeight * text.length < 0) {
+                textY = canvas.height;
+              }
+              break;
           }
           break;
         case Direction.Down:
-          if (props.scrollerConfig.textDirection === Direction.Up) {
-            textY -= speed;
-            if (textY + textHeight * text.length + canvas.height / 2 < 0) {
-              textY = canvas.height - canvas.height / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Left) {
-            textX += speed;
-            if (textX > canvas.width + canvas.height / 2) {
-              textX = -textWidth - canvas.height / 2;
-            }
-          } else if (props.scrollerConfig.textDirection === Direction.Right) {
-            textX -= speed;
-            if (textX + textWidth + canvas.height / 2 < 0) {
-              textX = canvas.width + canvas.height / 2;
-            }
-          } else {
-            textY += speed;
-            if (textY > canvas.height) {
-              textY = -textHeight * text.length;
-            }
+          switch (props.scrollerConfig.textDirection) {
+            case Direction.Up:
+              textY -= scrollSpeed;
+              if (textY + textHeight * text.length + canvas.height / 2 < 0) {
+                textY = canvas.height - canvas.height / 2;
+              }
+              break;
+            case Direction.Left:
+              textX += scrollSpeed;
+              if (textX > canvas.width + canvas.height / 2) {
+                textX = -textWidth - canvas.height / 2;
+              }
+              break;
+            case Direction.Right:
+              textX -= scrollSpeed;
+              if (textX + textWidth + canvas.height / 2 < 0) {
+                textX = canvas.width + canvas.height / 2;
+              }
+              break;
+            case Direction.Down:
+              textY += scrollSpeed;
+              if (textY > canvas.height) {
+                textY = -textHeight * text.length;
+              }
+              break;
           }
           break;
       }
@@ -274,6 +291,7 @@ export default function TextScrollerCanvas(props: {
       }}
       ref={canvasRef}
       onClick={props.onClick}
+      onKeyDown={props.onKeyDown}
     />
   );
 }
