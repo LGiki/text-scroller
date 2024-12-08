@@ -26,7 +26,7 @@ export default function App() {
         <Header />
         <div className="flex flex-col gap-3 flex-1 h-0 w-full p-3">
           <div className="flex-shrink-0 flex gap-2 w-full">
-            <Textarea
+            <Input
               className="resize-none flex-1"
               placeholder={t("scrollerTextInputPlacerholder")}
               value={scrollerEditorStore.scrollerConfig.scrollerText}
@@ -37,7 +37,7 @@ export default function App() {
               }
             />
             <Button
-              className="h-full flex-shrink-0"
+              className="flex-shrink-0"
               variant="outline"
               disabled={
                 scrollerEditorStore.scrollerConfig.scrollerText.length === 0
