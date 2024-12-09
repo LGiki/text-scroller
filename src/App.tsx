@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
 import useFullScreen from "@/hooks/use-full-screen";
 import { Input } from "@/components/ui/input";
+import { hash } from "ohash";
 
 export default function App() {
   const historyScrollersStore = useHistoryScollersStore();
@@ -39,7 +40,14 @@ export default function App() {
 
   return (
     <>
-      <div className="flex flex-col h-dvh">
+      <div
+        className="flex flex-col h-svh"
+        style={{
+          height: "calc(100svh - env(safe-area-inset-bottom, 0px))",
+          marginTop: "env(safe-area-inset-top, 0px)",
+          marginBottom: "env(safe-area-inset-bottom, 0px)",
+        }}
+      >
         <Header />
         <div className="flex flex-col gap-3 flex-1 h-0 w-full p-3">
           <div className="flex-shrink-0 flex gap-2 w-full">
@@ -81,7 +89,10 @@ export default function App() {
             <Button
               variant="outline"
               className="flex-shrink-0"
-              onClick={scrollerEditorStore.resetScrollerConfig}
+              onClick={() => {
+                scrollerEditorStore.resetScrollerConfig();
+                toast.success(t("toast.scrollerConfigReset"));
+              }}
             >
               <RotateCcw />
               {t("reset")}
@@ -96,8 +107,16 @@ export default function App() {
                   toast.error(t("toast.emptyScrollerContent"));
                   return;
                 }
-                favoriteScollersStore.add(scrollerEditorStore.scrollerConfig);
-                toast.success(t("toast.addedToFavoriteScrollers"))
+                const scrollerHash = hash(scrollerEditorStore.scrollerConfig);
+                const isScrollerExists = favoriteScollersStore.scrollers.some(
+                  (scroller) => scroller.id === scrollerHash
+                );
+                if (isScrollerExists) {
+                  toast.error("toast.favoriteScrollerExists");
+                } else {
+                  favoriteScollersStore.add(scrollerEditorStore.scrollerConfig);
+                  toast.success(t("toast.addedToFavoriteScrollers"));
+                }
               }}
             >
               <Star />

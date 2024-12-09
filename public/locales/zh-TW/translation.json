@@ -64,9 +64,11 @@
     },
     "toast": {
         "scrollerDeleted": "捲動元件已刪除",
+        "scrollerConfigReset": "已重置捲動元件設置",
         "allScrollerDeleted": "所有捲動元件已刪除",
         "emptyScrollerContent": "捲動元件內容為空",
-        "addedToFavoriteScrollers": "已添加到收藏"
+        "addedToFavoriteScrollers": "已添加到收藏夾",
+        "favoriteScrollerExists": "收藏夾中已存在該捲動元件"
     },
     "dialog": {
         "deleteAll": {

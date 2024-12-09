@@ -64,9 +64,11 @@
     },
     "toast": {
         "scrollerDeleted": "Scroller deleted",
+        "scrollerConfigReset": "Scoller config reset",
         "allScrollerDeleted": "All scroller deleted",
         "emptyScrollerContent": "The scroller content is empty",
-        "addedToFavoriteScrollers": "Successfully added to favorite scrollers"
+        "addedToFavoriteScrollers": "Successfully added to favorite scrollers",
+        "favoriteScrollerExists": "Scroller is already in your favorites list"
     },
     "dialog": {
         "deleteAll": {

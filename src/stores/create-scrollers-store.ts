@@ -1,8 +1,8 @@
 import { TextScrollerConfig } from "@/types/text-scroller";
 import { create } from "zustand";
-import { nanoid } from "nanoid";
 import { persist } from "zustand/middleware";
 import { getCurrentDateTime } from "@/utils/datetime";
+import { hash } from "ohash";
 
 interface ScrollerStoreItem {
     id: string;
@@ -25,7 +25,7 @@ export const createScrollerStore = (localStorageName: string, maxScrollersCount?
                 add: (scroller: TextScrollerConfig) => {
                     set((state) => {
                         const newScrollerStoreItem: ScrollerStoreItem = {
-                            id: nanoid(10),
+                            id: hash(scroller),
                             scrollerConfig: scroller,
                             createdAt: getCurrentDateTime(),
                         };

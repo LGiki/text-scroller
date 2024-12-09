@@ -48,8 +48,11 @@ export const useScrollerInstanceStore = create<ScrollerInstanceState>()(set => (
         })
     },
     resetScrollerConfig: () => {
-        set({
-            scrollerConfig: INITIAL_SCROLLER_CONFIG
-        })
+        set(state => ({
+            scrollerConfig: {
+                ...INITIAL_SCROLLER_CONFIG,
+                scrollerText: state.scrollerConfig.scrollerText
+            }
+        }))
     }
 }))
