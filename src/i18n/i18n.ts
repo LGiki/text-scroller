@@ -31,7 +31,7 @@ i18n
         load: 'currentOnly',
         supportedLngs: supportedLanguages.map(supportedLanguage => supportedLanguage.locale),
         fallbackLng: 'en',
-        debug: true,
+        debug: !import.meta.env.PROD,
         interpolation: {
             escapeValue: false,
         },
