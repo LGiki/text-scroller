@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Direction, TextScrollerConfig } from "@/types/text-scroller";
+import { hexColorToRGB } from "@/utils/color";
 import {
   BlinkFrequencySettings,
   GlowShadowBlurBaseValues,
@@ -50,11 +51,8 @@ export default function TextScrollerCanvas(props: {
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const globalAlphaBackup = ctx.globalAlpha;
-      ctx.globalAlpha = 1;
       ctx.fillStyle = props.scrollerConfig.backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = globalAlphaBackup;
 
       const fontSizePercentage =
         parseInt(props.scrollerConfig.fontSizePercentage) / 100;
@@ -82,7 +80,10 @@ export default function TextScrollerCanvas(props: {
         if (blinkOpacity <= 0 || blinkOpacity >= 1) {
           blinkDirection *= -1;
         }
-        ctx.globalAlpha = blinkOpacity;
+        const textColorRGB = hexColorToRGB(props.scrollerConfig.textColor)
+        if (textColorRGB !== null) {
+          ctx.fillStyle = `rgba(${textColorRGB.r},${textColorRGB.g},${textColorRGB.b},${blinkOpacity})`;
+        }
       }
 
       if (props.scrollerConfig.glow) {
