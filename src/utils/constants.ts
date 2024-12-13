@@ -34,8 +34,8 @@ export const GlowShadowBlurBaseValues = {
 }
 
 export const ScrollSpeedSettings = {
-    [Speed.Slow]: 3,
-    [Speed.Medium]: 10,
-    [Speed.Fast]: 20,
-    [Speed.UltraFast]: 30,
+    [Speed.Slow]: 0.003,
+    [Speed.Medium]: 0.007,
+    [Speed.Fast]: 0.014,
+    [Speed.UltraFast]: 0.021,
 }
