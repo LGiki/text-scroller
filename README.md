@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# Text Scoller
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img src="./public/icons/logo.svg" width="100" height="100" align="right" />
 
-Currently, two official plugins are available:
+**Text Scroller** is a web-based tool built with React that brings vibrant, customizable scrolling text effects.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Features
 
-## Expanding the ESLint configuration
+- **Progressive Web App (PWA) Support**: Use it offline seamlessly.
+- **Glowing Scrollbar Effect**: Add a radiant touch to your scrolling text.
+- **Blinking Scrollbar Effect**: Create eye-catching visuals with blinking animations.
+- **Customizable Scrolling Directions**: Scroll text in any direction.
+- **Flexible Text Orientation**: Adjust the orientation of your text to suit your needs.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# Preview
 
-- Configure the top-level `parserOptions` property like this:
+🔗 [https://text-scroller.lgiki.net](https://text-scroller.lgiki.net)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+# Screenshot
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+![](https://github.com/user-attachments/assets/e370c876-67a4-466f-9a51-756f4cb1c8ff)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+# License
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+MIT License.
