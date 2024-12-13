@@ -18,7 +18,7 @@
 
 # Screenshot
 
-![](https://github.com/user-attachments/assets/e370c876-67a4-466f-9a51-756f4cb1c8ff)
+<img src="https://github.com/user-attachments/assets/e370c876-67a4-466f-9a51-756f4cb1c8ff" style="width: 50%" />
 
 # License
 
